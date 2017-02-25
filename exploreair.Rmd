@@ -6,21 +6,27 @@ output: html_document
 library(ggplot2)
 library(leaflet)
 library(knitr)
+library(lubridate)
 ```
 
 # `r zones@data[i,3] ` Air Quality Factsheet
 
-## Local Authority Boundary with Air Quality Management Areas
+## Local Authority Boundary
 
 ```{r Boundary Area Map}
 
+#read in shapefile
+# AQMA.subset <- intersect(AQMA.shp,LA.subset)
+# mapview::mapview(zones[i,])
 
 leaflet() %>%
   addTiles() %>% # Add default OpenStreetMap map tiles
 addPolygons(
-    data=AQMA[zones[i,],], weight = 1) %>%
-addPolygons(
-    data=zones[i,], fillOpacity = 0, weight = 2)
+    data=zones[i,], weight = 2)
+
+# Add default OpenStreetMap map tiles
+# addPolygons(
+#     data=AQMA.subset, weight = 2)
 
 ```
 
@@ -32,7 +38,15 @@ addPolygons(
 
 ```{r}
 if(!is.null(nox)){
-  plot(nox$date, nox$nox)
+  #plot(nox$date, nox$nox)
+  nox$day <- weekdays(as.Date(nox$date))
+  nox$month <- months(as.Date(nox$date))
+  
+  nox$month<-as.ordered(nox$month) 
+  
+  ggplot(data = nox, aes(x = day, y=nox)) + geom_boxplot()
+  ggplot(data = nox, aes(x = month, y=nox)) + geom_boxplot()
+  
 } else {
   print("No NOx measures")
 }
@@ -68,5 +82,3 @@ if(!is.null(nox)){
 #      main = '', xlab = '', ylab = expression(paste('Ozone concentration [',
 #                                                     mu, 'g/', m^3, ']')))
 ```
-
-
