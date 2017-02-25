@@ -31,6 +31,11 @@ stations_raw$EMEP.Site.ID<-NULL
 stations_raw$Altitude..m.<-NULL
 
 
+
+
+
+
+
 # # Table 1 
 # Table1 <- read.csv("data/FS_Table1.csv")
 # # MissingLAs <- LA[!(LA$CODE %in% Table1$ONSCode),  ]
