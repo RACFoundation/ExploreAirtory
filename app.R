@@ -18,7 +18,7 @@ server <- function(input, output) {
   
   output$map1 <- renderLeaflet({
     
-    zones <- dl_las()
+    zones <- readRDS("zones.Rds")
     leaflet() %>% addTiles() %>% addPolygons(data = zones)
   })
 }
