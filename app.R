@@ -1,5 +1,4 @@
 ## app.R ##
-library(shinydashboard)
 library(sp)
 source("R/funs.R")
 
