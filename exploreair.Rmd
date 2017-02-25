@@ -10,22 +10,17 @@ library(knitr)
 
 # `r zones@data[i,3] ` Air Quality Factsheet
 
-## Local Authority Boundary
+## Local Authority Boundary with Air Quality Management Areas
 
 ```{r Boundary Area Map}
 
-#read in shapefile
-# AQMA.subset <- intersect(AQMA.shp,LA.subset)
-# mapview::mapview(zones[i,])
 
 leaflet() %>%
   addTiles() %>% # Add default OpenStreetMap map tiles
 addPolygons(
-    data=zones[i,], weight = 2)
-
-# Add default OpenStreetMap map tiles
-# addPolygons(
-#     data=AQMA.subset, weight = 2)
+    data=AQMA[zones[i,],], weight = 1) %>%
+addPolygons(
+    data=zones[i,], fillOpacity = 0, weight = 2)
 
 ```
 

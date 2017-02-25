@@ -1,5 +1,6 @@
 require(sp)
 require(openair)
+require(rgdal)
 source("R/funs.R")
 
 # data frame of 238 sensors
@@ -20,6 +21,8 @@ res_dir <- paste0(zone_type, "/results-", date_now)
 if (!file.exists(res_dir)) {
   dir.create(res_dir)
 }
+
+AQMA <- readOGR("AQMA_WGS84.shp")
 
 # variables to add to zones data
 zones$n_sensors = NA # how many sensors per zone?
