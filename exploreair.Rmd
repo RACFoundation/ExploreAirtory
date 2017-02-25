@@ -16,7 +16,7 @@ library(lubridate)
 ```{r Boundary Area Map}
 
 leaflet() %>%
-  addTiles() %>% # Add default OpenStreetMap map tiles
+  addProviderTiles(providers$CartoDB.Positron) %>%
 addPolygons(
     data=zones[i,], fillOpacity = 0, weight = 2) %>%
 addPolygons(
