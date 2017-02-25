@@ -15,18 +15,12 @@ library(lubridate)
 
 ```{r Boundary Area Map}
 
-#read in shapefile
-# AQMA.subset <- intersect(AQMA.shp,LA.subset)
-# mapview::mapview(zones[i,])
-
 leaflet() %>%
   addTiles() %>% # Add default OpenStreetMap map tiles
 addPolygons(
-    data=zones[i,], weight = 2)
-
-# Add default OpenStreetMap map tiles
-# addPolygons(
-#     data=AQMA.subset, weight = 2)
+    data=zones[i,], fillOpacity = 0, weight = 2) %>%
+addPolygons(
+  data=AQMA[zones[i,],], color = "red", weight = 1)
 
 ```
 
