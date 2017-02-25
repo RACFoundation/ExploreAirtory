@@ -1,0 +1,390 @@
+---
+output: html_document
+---
+
+```{r, echo=FALSE}
+suppressWarnings(suppressPackageStartupMessages(library(ggplot2)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(leaflet)))
+suppressWarnings(suppressPackageStartupMessages(library(stringr)))
+library(knitr)
+library(markdown)
+library(rmarkdown)
+```
+
+```{r, echo=FALSE}
+ThisLA <- LA[LA$CODE==CODE,]
+
+```
+
+# `r ThisLA$NAME` Air Quality Factsheet
+
+##Local Authority Boundary
+```{r Boundary Area Map, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+#read in shapefile
+LA.shp <- readShapeSpatial('LA_WGS84', proj4string = CRS("+init=epsg:4326"))
+AQMA.shp<-readShapeSpatial('AQMA_WGS84', proj4string = CRS("+init=epsg:4326"))
+LA.subset <- LA.shp[LA.shp$CODE==CODE, ]
+
+# AQMA.subset <- intersect(AQMA.shp,LA.subset)
+
+LAmap <-leaflet() %>%
+  addTiles() %>% # Add default OpenStreetMap map tiles
+addPolygons(
+    data=LA.subset, weight = 2) %>% # Add default OpenStreetMap map tiles
+# addPolygons(
+#     data=AQMA.subset, weight = 2)
+LAmap  # Print the map
+
+```
+
+© Ordnance Survey & Crown copyright and database right 2017
+ 
+```{r Accident location subset, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+airquality_subset <- stations_raw[LA.subset, ]
+
+
+LAmap2 <-leaflet() %>%
+  addTiles() %>% # Add default OpenStreetMap map tiles
+  addPolygons(
+    data=LA.subset, fillOpacity = 0.1, weight = 2) %>%
+addCircleMarkers(
+    data = airquality_subset,
+    radius = 1, color="blue")
+
+LAmap2  # Print the map
+
+```
+
+```{r}
+
+df <- get1Hdata('MY1', years=2015)
+
+# Aggregate to daily means and plot
+library('zoo')
+par(mai = c(0.5, 1, 0, 0)) 
+my1 <- zoo(x = df$Ozone, order.by = as.POSIXlt(df$datetime))
+plot(aggregate(my1, as.Date(as.POSIXlt(df$datetime)), mean), 
+     main = '', xlab = '', ylab = expression(paste('Ozone concentration [',
+                                                    mu, 'g/', m^3, ']')))
+```
+
+
+
+```{r Casualties by year and type, compared to elsewhere, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+
+graph1 <- 
+        ggplot() +
+        geom_line(data = Table1[Table1$severity=="Fatal",], aes(x=as.factor(Year), y=number, group = ONSCode), alpha = 1/5, colour = "grey") +
+        geom_line(data = ThisTable1[ThisTable1$severity=="Fatal",], aes(x=as.factor(Year), y=number, group = ONSCode), alpha = 1, colour = "red") +
+        ylab("Fatalities per year") +
+        xlab("Year") +
+        theme_classic() +
+        ggtitle (paste0("Fatalities in ", ThisLA$NAME, " compared to all other LAs")) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+        
+print(graph1)
+
+graph2 <- 
+        ggplot() +
+        geom_line(data = Table1[Table1$severity=="Serious",], aes(x=as.factor(Year), y=number, group = ONSCode), alpha = 1/5, colour = "grey") +
+        geom_line(data = ThisTable1[ThisTable1$severity=="Serious",], aes(x=as.factor(Year), y=number, group = ONSCode), alpha = 1, colour = "red") +
+        ylab("Serious Injuries per year") +
+        xlab("Year") +
+        theme_classic() +
+        ggtitle (paste0("Serious Injuries in ", ThisLA$NAME, " compared to all other LAs")) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+print(graph2)
+
+graph3 <- 
+        ggplot() +
+        geom_line(data = Table1[Table1$severity=="Slight",], aes(x=as.factor(Year), y=number, group = ONSCode), alpha = 1/5, colour = "grey") +
+        geom_line(data = ThisTable1[ThisTable1$severity=="Slight",], aes(x=as.factor(Year), y=number, group = ONSCode), alpha = 1, colour = "red") +
+        ylab("Slight Injuries per year") +
+        xlab("Year") +
+        theme_classic() +
+        ggtitle (paste0("Slight Injuries in ", ThisLA$NAME, " compared to all other LAs")) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+        
+print(graph3)
+
+```
+
+```{r % Improvement in Casualties compared to elsewhere 1, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+Improvement <- Table1
+Improvement <- Improvement[Improvement$Year==min(Table1$Year) | Improvement$Year==max(Table1$Year),]
+LA$ONSCode <- LA$CODE
+Improvement <- merge(LA, Improvement, all = TRUE)
+Improvement$CODE <- NULL
+Improvement$DESCRIPTIO <- NULL
+Fatal <- Improvement[Improvement$severity=="Fatal",]
+Serious <- Improvement[Improvement$severity=="Serious",]
+rm(Improvement)
+
+Fatal <- (Fatal %>% spread(Year, number))
+Fatal[[6]] <- NULL
+Fatal$severity <- NULL
+
+Serious <- (Serious %>% spread(Year, number))
+Serious[[6]] <- NULL
+Serious$severity <- NULL
+Serious[[2]] <- NULL
+
+KSI <- merge(Fatal, Serious, by = "ONSCode")
+KSI$Then <- KSI[[3]] + KSI[[5]]
+KSI$Now <- KSI[[4]] + KSI[[6]]
+
+KSI$Change <- KSI[[8]] - KSI[[7]]
+KSI$`Percent Change` <- (KSI$Change/KSI[[7]])*100
+rm(Fatal, Serious)
+```
+
+## Change in KSIs, between `r min(Table1$Year)` and `r max(Table1$Year)`
+
+```{r % Improvement in Casualties compared to elsewhere 2, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+KSI <- na.omit(KSI)
+KSI <- KSI[order((as.numeric(KSI$`Percent Change`))),]
+rownames(KSI) <- 1:nrow(KSI)
+
+KSI.rownum.LA <-  which(KSI$ONSCode==CODE, arr.ind=TRUE)
+KSI.top <- as.numeric(KSI.rownum.LA) - 5
+KSI.bottom <- as.numeric(KSI.rownum.LA) + 5
+KSI.rownum <- NROW(KSI)
+
+KSI.top <- ifelse(KSI.top <= -1, 0, KSI.top)
+
+KSI[[1]] <- NULL
+KSI[[2]] <- NULL
+KSI[[2]] <- NULL
+KSI[[2]] <- NULL
+KSI[[2]] <- NULL
+
+kable(KSI[1:10,], digits=2, row.names = TRUE, caption = "Percentage change in KSIs by LA, top")
+
+kable(KSI[KSI.top:KSI.bottom,], digits=2, row.names = TRUE, caption = paste0("Percentage change in KSIs by LA, around ", ThisLA$NAME))
+
+kable(KSI[(KSI.rownum-10):KSI.rownum,], digits=2, row.names = TRUE, caption = "Percentage change in KSIs by LA, bottom")
+
+```
+
+```{r Casualties table, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+Casualties.df <- (ThisTable1 %>% spread(severity, number, 3:4))
+Casualties.df$ONSCode <- NULL
+
+kable(Casualties.df, digits=2, caption = paste0("Casualties over time, ", ThisLA$NAME))
+
+```
+
+## `r ThisLA$NAME` crash locations, `r min(year(Accidents$Date))` to `r max(year(Accidents$Date))`
+
+```{r Accident location subset, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+accidents_subset <- Accidents[LA.subset, ]
+
+pal <- colorFactor("Reds", domain = accidents_subset$Accident_Severity)
+
+LAmap2 <-leaflet() %>%
+  addTiles() %>% # Add default OpenStreetMap map tiles
+  addPolygons(
+    data=LA.subset, fillOpacity = 0.1, weight = 2) %>%
+addCircleMarkers(
+    data = accidents_subset,
+    radius = 1,
+    color = ~pal(Accident_Severity)) %>%
+addLegend("bottomright", pal = pal, values = accidents_subset$Accident_Severity,
+    title = "Crash Severity")
+
+LAmap2  # Print the map
+
+```
+
+
+
+[Two heatmap/pie charts of fatal and serious casualties by road user type]
+
+[Two bar charts, fatal and serious by age (five years?)]
+
+KSI casualties by age
+KSI casualties by gender
+KSI casualties by road length
+KSI casualties by road user type
+KSI casualties per revenue spend
+Total casualties per 100 million vehicle miles
+
+
+Collisions by road length
+Collisions by road owner
+Collisions by road type
+Collisions by severity
+Vehicle accident rate
+
+KSI casualties by age
+KSI casualties by gender
+
+
+Collisions by road length
+Collisions by road type
+KSI casualties by road length
+
+
+KSI casualties by road user type
+Vehicle accident rate
+Vehicles involved
+
+
+
+```{r Casualty rate by year and type, compared to elsewhere, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+
+graph4 <- 
+        ggplot() +
+        geom_line(data = Table2[Table2$severity=="Fatal",], aes(x=as.factor(Year), y=as.numeric(Rate), group = ONSCode), alpha = 1/5, colour = "grey") +
+        geom_line(data = ThisTable2[ThisTable2$severity=="Fatal",], aes(x=as.factor(Year), y=as.numeric(Rate), group = ONSCode), alpha = 1, colour = "red") +
+        ylab("Fatalities per 10,000 per year") +
+        xlab("Year") +
+        theme_classic() +
+        ggtitle (paste0("Fatality rate in ", ThisLA$NAME, " compared to all other LAs")) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+        
+print(graph4)
+
+graph5 <- 
+        ggplot() +
+        geom_line(data = Table2[Table2$severity=="Serious",], aes(x=as.factor(Year), y=as.numeric(Rate), group = ONSCode), alpha = 1/5, colour = "grey") +
+        geom_line(data = ThisTable2[ThisTable2$severity=="Serious",], aes(x=as.factor(Year), y=Rate, group = ONSCode), alpha = 1, colour = "red") +
+        ylab("Serious Injuries per 10,000 per year") +
+        xlab("Year") +
+        theme_classic() +
+        ggtitle (paste0("Serious Injury Rate in ", ThisLA$NAME, " compared to all other LAs")) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+print(graph5)
+
+graph6 <- 
+        ggplot() +
+        geom_line(data = Table2[Table2$severity=="Slight",], aes(x=as.factor(Year), y=as.numeric(Rate), group = ONSCode), alpha = 1/5, colour = "grey") +
+        geom_line(data = ThisTable2[ThisTable2$severity=="Slight",], aes(x=as.factor(Year), y=as.numeric(Rate), group = ONSCode), alpha = 1, colour = "red") +
+        ylab("Slight Injuries per 10,000 per year") +
+        xlab("Year") +
+        theme_classic() +
+        ggtitle (paste0("Slight Injury Rate in ", ThisLA$NAME, " compared to all other LAs")) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+        
+print(graph6)
+
+```
+
+
+
+```{r % Improvement in Casualty rate compared to elsewhere 1, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+Improvement <- Table2
+Improvement <- na.omit(Improvement)
+Improvement <- Improvement[Improvement$Year==min(Table2$Year) | Improvement$Year==max(Table2$Year),]
+LA$ONSCode <- LA$CODE
+Improvement <- merge(LA, Improvement, all = TRUE)
+Improvement$CODE <- NULL
+Improvement$DESCRIPTIO <- NULL
+Fatal <- Improvement[Improvement$severity=="Fatal",]
+Serious <- Improvement[Improvement$severity=="Serious",]
+rm(Improvement)
+
+Fatal[[4]] <- NULL
+Fatal[[4]] <- NULL
+Fatal[[4]] <- NULL
+Fatal <- na.omit(Fatal)
+Fatal <- (Fatal %>% spread(Year, Rate))
+Fatal$Change <- Fatal[[4]] - Fatal[[3]]
+Fatal$percentchange <- (Fatal$Change/Fatal[[3]])*100
+Fatal$percentchange[Fatal$percentchange == "Inf"] <- NA
+Fatal$percentchange[Fatal$percentchange == "NaN"] <- NA
+
+Serious[[4]] <- NULL
+Serious[[4]] <- NULL
+Serious[[4]] <- NULL
+Serious <- na.omit(Serious)
+Serious <- (Serious %>% spread(Year, Rate))
+Serious$Change <- Serious[[4]] - Serious[[3]]
+Serious$percentchange <- (Serious$Change/Serious[[3]])*100
+Serious$percentchange[Serious$percentchange == "Inf"] <- NA
+Serious$percentchange[Serious$percentchange == "NaN"] <- NA
+
+```
+
+## Change in Fatal and Serious Casualty Rates, between `r min(Table2$Year)` and `r max(Table2$Year)`
+
+```{r % Improvement in Casualty rate compared to elsewhere 2, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+Fatal <- Fatal[order((as.numeric(Fatal$percentchange))),]
+rownames(Fatal) <- 1:nrow(Fatal)
+
+Fatal.rownum.LA <-  which(Fatal$ONSCode==CODE, arr.ind=TRUE)
+Fatal.top <- as.numeric(Fatal.rownum.LA) - 5
+Fatal.bottom <- as.numeric(Fatal.rownum.LA) + 5
+Fatal.rownum <- NROW(Fatal)
+
+Fatal.top <- ifelse(Fatal.top <= -1, 0, Fatal.top)
+
+Fatal[[1]] <- NULL
+
+kable(Fatal[1:10,], digits=2, row.names = TRUE, caption = "Percentage change in Fatality rate by LA, top")
+
+kable(Fatal[Fatal.top:Fatal.bottom,], digits=2, row.names = TRUE, caption = paste0("Percentage change in Fatality rate by LA, around ", ThisLA$NAME))
+
+kable(Fatal[(Fatal.rownum-10):Fatal.rownum,], digits=2, row.names = TRUE, caption = "Percentage change in Fatality rate by LA, bottom")
+
+Serious <- Serious[order((as.numeric(Serious$percentchange))),]
+rownames(Serious) <- 1:nrow(Serious)
+
+Serious.rownum.LA <-  which(Serious$ONSCode==CODE, arr.ind=TRUE)
+Serious.top <- as.numeric(Serious.rownum.LA) - 5
+Serious.bottom <- as.numeric(Serious.rownum.LA) + 5
+Serious.rownum <- NROW(Serious)
+
+Serious.top <- ifelse(Serious.top <= -1, 0, Serious.top)
+
+Serious[[1]] <- NULL
+
+kable(Serious[1:10,], digits=2, row.names = TRUE, caption = "Percentage change in Serious casualty rate by LA, top")
+
+kable(Serious[Serious.top:Serious.bottom,], digits=2, row.names = TRUE, caption = paste0("Percentage change in Serious casualty rate by LA, around ", ThisLA$NAME))
+
+kable(Serious[(Serious.rownum-10):Serious.rownum,], digits=2, row.names = TRUE, caption = "Percentage change in Serious casualty rate by LA, bottom")
+
+```
+
+```{r  Casualty severity waffle, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+waffle.df <- c(`Fatal`= sum(ThisTable1$number[ThisTable1$severity=="Fatal"]),
+`Serious`= sum(ThisTable1$number[ThisTable1$severity=="Serious"]), `Slight`= sum(ThisTable1$number[ThisTable1$severity=="Slight"]))
+
+waffle(waffle.df, rows=50, size=0.5, colors=c("#cc0000", "#ff9900", "#ff6699"), title=paste0("Casualties by severity in ", ThisLA$NAME, ", ", min(ThisTable1$Year), " to ", max(ThisTable1$Year)), xlab="1 square is one casualty")
+  
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+population...
+Source: Office for National Statistics, Northern Ireland Statistics and Research Agency,
+National Records of Scotland © Crown Copyright 2013
+
+
+Last updated: `r Sys.Date()`.  

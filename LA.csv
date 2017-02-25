@@ -1,0 +1,381 @@
+NAME,DESCRIPTIO,CODE
+Wycombe District,District,E07000007
+South Bucks District,District,E07000006
+Chiltern District,District,E07000005
+Aylesbury Vale District,District,E07000004
+Fenland District,District,E07000010
+South Cambridgeshire District,District,E07000012
+East Cambridgeshire District,District,E07000009
+Huntingdonshire District,District,E07000011
+Cambridge District,District,E07000008
+Copeland District,District,E07000029
+Carlisle District,District,E07000028
+South Lakeland District,District,E07000031
+Allerdale District,District,E07000026
+Eden District,District,E07000030
+Barrow-in-Furness District,District,E07000027
+High Peak District,District,E07000037
+South Derbyshire District,District,E07000039
+Erewash District,District,E07000036
+North East Derbyshire District,District,E07000038
+Amber Valley District,District,E07000032
+Bolsover District,District,E07000033
+Derbyshire Dales District,District,E07000035
+Chesterfield District,District,E07000034
+North Devon District,District,E07000043
+East Devon District,District,E07000040
+Teignbridge District,District,E07000045
+West Devon District,District,E07000047
+Mid Devon District,District,E07000042
+Exeter District,District,E07000041
+Purbeck District,District,E07000051
+Christchurch District,District,E07000048
+West Dorset District,District,E07000052
+East Dorset District,District,E07000049
+North Dorset District,District,E07000050
+Weymouth and Portland District,District,E07000053
+Lewes District,District,E07000063
+Rother District,District,E07000064
+Wealden District,District,E07000065
+Eastbourne District,District,E07000061
+Hastings District,District,E07000062
+Brentwood District,District,E07000068
+Rochford District,District,E07000075
+Epping Forest District,District,E07000072
+Tendring District,District,E07000076
+Uttlesford District,District,E07000077
+Chelmsford District,District,E07000070
+Colchester District,District,E07000071
+Maldon District,District,E07000074
+Braintree District,District,E07000067
+Harlow District,District,E07000073
+Basildon District,District,E07000066
+Castle Point District,District,E07000069
+Forest of Dean District,District,E07000080
+Cotswold District,District,E07000079
+Stroud District,District,E07000082
+Tewkesbury District,District,E07000083
+Gloucester District,District,E07000081
+Cheltenham District,District,E07000078
+Basingstoke and Deane District,District,E07000084
+New Forest District,District,E07000091
+Eastleigh District,District,E07000086
+East Hampshire District,District,E07000085
+Winchester District,District,E07000094
+Test Valley District,District,E07000093
+Hart District,District,E07000089
+Gosport District,District,E07000088
+Fareham District,District,E07000087
+Havant District,District,E07000090
+Rushmoor District,District,E07000092
+Three Rivers District,District,E07000102
+Hertsmere District,District,E07000098
+Broxbourne District,District,E07000095
+Dacorum District,District,E07000096
+East Hertfordshire District,District,E07000242
+St. Albans District,District,E07000240
+Welwyn Hatfield District,District,E07000241
+North Hertfordshire District,District,E07000099
+Watford District,District,E07000103
+Stevenage District,District,E07000243
+Tunbridge Wells District,District,E07000116
+Shepway District,District,E07000112
+Sevenoaks District,District,E07000111
+Tonbridge and Malling District,District,E07000115
+Thanet District,District,E07000114
+Ashford District,District,E07000105
+Canterbury District,District,E07000106
+Dover District,District,E07000108
+Maidstone District,District,E07000110
+Swale District,District,E07000113
+Dartford District,District,E07000107
+Gravesham District,District,E07000109
+West Lancashire District,District,E07000127
+Lancaster District,District,E07000121
+Chorley District,District,E07000118
+South Ribble District,District,E07000126
+Rossendale District,District,E07000125
+Fylde District,District,E07000119
+Preston District,District,E07000123
+Wyre District,District,E07000128
+Pendle District,District,E07000122
+Ribble Valley District,District,E07000124
+Hyndburn District,District,E07000120
+Burnley District,District,E07000117
+Hinckley and Bosworth District,District,E07000132
+North West Leicestershire District,District,E07000134
+Melton District,District,E07000133
+Harborough District,District,E07000131
+Blaby District,District,E07000129
+Charnwood District,District,E07000130
+Oadby and Wigston District,District,E07000135
+West Lindsey District,District,E07000142
+South Kesteven District,District,E07000141
+South Holland District,District,E07000140
+Boston District,District,E07000136
+North Kesteven District,District,E07000139
+East Lindsey District,District,E07000137
+Lincoln District,District,E07000138
+Great Yarmouth District,District,E07000145
+South Norfolk District,District,E07000149
+King's Lynn and West Norfolk District,District,E07000146
+Breckland District,District,E07000143
+Norwich District,District,E07000148
+South Northamptonshire District,District,E07000155
+East Northamptonshire District,District,E07000152
+Daventry District,District,E07000151
+Wellingborough District,District,E07000156
+Kettering District,District,E07000153
+Northampton District,District,E07000154
+Corby District,District,E07000150
+Scarborough District,District,E07000168
+Selby District,District,E07000169
+Craven District,District,E07000163
+Richmondshire District,District,E07000166
+Harrogate District,District,E07000165
+Ryedale District,District,E07000167
+Hambleton District,District,E07000164
+Bassetlaw District,District,E07000171
+Rushcliffe District,District,E07000176
+Gedling District,District,E07000173
+Ashfield District,District,E07000170
+Newark and Sherwood District,District,E07000175
+Broxtowe District,District,E07000172
+Mansfield District,District,E07000174
+Vale of White Horse District,District,E07000180
+South Oxfordshire District,District,E07000179
+Cherwell District,District,E07000177
+West Oxfordshire District,District,E07000181
+Oxford District,District,E07000178
+West Somerset District,District,E07000191
+Mendip District,District,E07000187
+Taunton Deane District,District,E07000190
+South Somerset District,District,E07000189
+Sedgemoor District,District,E07000188
+Staffordshire Moorlands District,District,E07000198
+South Staffordshire District,District,E07000196
+Lichfield District,District,E07000194
+Newcastle-under-Lyme District,District,E07000195
+Stafford District,District,E07000197
+East Staffordshire District,District,E07000193
+Cannock Chase District,District,E07000192
+Tamworth District,District,E07000199
+Waveney District,District,E07000206
+Babergh District,District,E07000200
+Suffolk Coastal District,District,E07000205
+St. Edmundsbury District,District,E07000204
+Forest Heath District,District,E07000201
+Mid Suffolk District,District,E07000203
+Ipswich District,District,E07000202
+Waverley District,District,E07000216
+Tandridge District,District,E07000215
+Woking District,District,E07000217
+Surrey Heath District,District,E07000214
+Runnymede District,District,E07000212
+Guildford District,District,E07000209
+Reigate and Banstead District,District,E07000211
+Mole Valley District,District,E07000210
+Elmbridge District,District,E07000207
+Spelthorne District,District,E07000213
+Epsom and Ewell District,District,E07000208
+North Warwickshire District,District,E07000218
+Rugby District,District,E07000220
+Warwick District,District,E07000222
+Stratford-on-Avon District,District,E07000221
+Nuneaton and Bedworth District,District,E07000219
+Arun District,District,E07000224
+Adur District,District,E07000223
+Chichester District,District,E07000225
+Mid Sussex District,District,E07000228
+Horsham District,District,E07000227
+Worthing District,District,E07000229
+Crawley District,District,E07000226
+Malvern Hills District,District,E07000235
+Wyre Forest District,District,E07000239
+Wychavon District,District,E07000238
+Bromsgrove District,District,E07000234
+Worcester District,District,E07000237
+Redditch District,District,E07000236
+Kingston upon Thames,London Borough,E09000021
+Croydon,London Borough,E09000008
+Bromley,London Borough,E09000006
+Hounslow,London Borough,E09000018
+Ealing,London Borough,E09000009
+Havering,London Borough,E09000016
+Hillingdon,London Borough,E09000017
+Harrow,London Borough,E09000015
+Brent,London Borough,E09000005
+Barnet,London Borough,E09000003
+Lambeth,London Borough,E09000022
+Southwark,London Borough,E09000028
+Lewisham,London Borough,E09000023
+Greenwich,London Borough,E09000011
+Bexley,London Borough,E09000004
+Enfield,London Borough,E09000010
+Waltham Forest,London Borough,E09000031
+Redbridge,London Borough,E09000026
+Sutton,London Borough,E09000029
+Richmond upon Thames,London Borough,E09000027
+Merton,London Borough,E09000024
+Wandsworth,London Borough,E09000032
+Hammersmith and Fulham,London Borough,E09000013
+Kensington and Chelsea,London Borough,E09000020
+City of Westminster,London Borough,E09000033
+Camden,London Borough,E09000007
+Tower Hamlets,London Borough,E09000030
+Islington,London Borough,E09000019
+Hackney,London Borough,E09000012
+Haringey,London Borough,E09000014
+Newham,London Borough,E09000025
+Barking and Dagenham,London Borough,E09000002
+City of London,London Borough,E09000001
+Barnsley District,Metropolitan District,E08000016
+Birmingham District,Metropolitan District,E08000025
+Bolton District,Metropolitan District,E08000001
+Bradford District,Metropolitan District,E08000032
+Bury District,Metropolitan District,E08000002
+Calderdale District,Metropolitan District,E08000033
+City of Wolverhampton District,Metropolitan District,E08000031
+Coventry District,Metropolitan District,E08000026
+Doncaster District,Metropolitan District,E08000017
+Dudley District,Metropolitan District,E08000027
+Gateshead District,Metropolitan District,E08000037
+Kirklees District,Metropolitan District,E08000034
+Knowsley District,Metropolitan District,E08000011
+Leeds District,Metropolitan District,E08000035
+Liverpool District,Metropolitan District,E08000012
+Manchester District,Metropolitan District,E08000003
+Newcastle upon Tyne District,Metropolitan District,E08000021
+North Tyneside District,Metropolitan District,E08000022
+Oldham District,Metropolitan District,E08000004
+Rochdale District,Metropolitan District,E08000005
+Rotherham District,Metropolitan District,E08000018
+Salford District,Metropolitan District,E08000006
+Sandwell District,Metropolitan District,E08000028
+Sefton District,Metropolitan District,E08000014
+Sheffield District,Metropolitan District,E08000019
+Solihull District,Metropolitan District,E08000029
+South Tyneside District,Metropolitan District,E08000023
+Stockport District,Metropolitan District,E08000007
+St. Helens District,Metropolitan District,E08000013
+Sunderland District,Metropolitan District,E08000024
+Tameside District,Metropolitan District,E08000008
+Trafford District,Metropolitan District,E08000009
+Wakefield District,Metropolitan District,E08000036
+Walsall District,Metropolitan District,E08000030
+Wigan District,Metropolitan District,E08000010
+Wirral District,Metropolitan District,E08000015
+Abertawe - Swansea,Unitary Authority,W06000011
+Angus,Unitary Authority,S12000041
+Bath and North East Somerset,Unitary Authority,E06000022
+Bedford,Unitary Authority,E06000055
+Blackburn with Darwen,Unitary Authority,E06000008
+Blackpool,Unitary Authority,E06000009
+Blaenau Gwent - Blaenau Gwent,Unitary Authority,W06000019
+Bournemouth,Unitary Authority,E06000028
+Bracknell Forest,Unitary Authority,E06000036
+Bro Morgannwg - the Vale of Glamorgan,Unitary Authority,W06000014
+Caerffili - Caerphilly,Unitary Authority,W06000018
+Casnewydd - Newport,Unitary Authority,W06000022
+Castell-nedd Port Talbot - Neath Port Talbot,Unitary Authority,W06000012
+Central Bedfordshire,Unitary Authority,E06000056
+Cheshire East,Unitary Authority,E06000049
+Cheshire West and Chester,Unitary Authority,E06000050
+City of Bristol,Unitary Authority,E06000023
+City of Derby,Unitary Authority,E06000015
+City of Kingston upon Hull,Unitary Authority,E06000010
+City of Leicester,Unitary Authority,E06000016
+City of Nottingham,Unitary Authority,E06000018
+City of Peterborough,Unitary Authority,E06000031
+City of Southampton,Unitary Authority,E06000045
+City of Stoke-on-Trent,Unitary Authority,E06000021
+Clackmannanshire,Unitary Authority,S12000005
+Conwy - Conwy,Unitary Authority,W06000003
+County Durham,Unitary Authority,E06000047
+County of Herefordshire,Unitary Authority,E06000019
+Darlington,Unitary Authority,E06000005
+Dundee City,Unitary Authority,S12000042
+East Ayrshire,Unitary Authority,S12000008
+East Dunbartonshire,Unitary Authority,S12000045
+East Renfrewshire,Unitary Authority,S12000011
+East Riding of Yorkshire,Unitary Authority,E06000011
+Falkirk,Unitary Authority,S12000014
+Glasgow City,Unitary Authority,S12000046
+Halton,Unitary Authority,E06000006
+Hartlepool,Unitary Authority,E06000001
+Inverclyde,Unitary Authority,S12000018
+Luton,Unitary Authority,E06000032
+Medway,Unitary Authority,E06000035
+Merthyr Tudful - Merthyr Tydfil,Unitary Authority,W06000024
+Middlesbrough,Unitary Authority,E06000002
+Midlothian,Unitary Authority,S12000019
+Milton Keynes,Unitary Authority,E06000042
+North East Lincolnshire,Unitary Authority,E06000012
+North Lanarkshire,Unitary Authority,S12000044
+North Lincolnshire,Unitary Authority,E06000013
+Pen-y-bont ar Ogwr - Bridgend,Unitary Authority,W06000013
+Perth and Kinross,Unitary Authority,S12000024
+Poole,Unitary Authority,E06000029
+Powys - Powys,Unitary Authority,W06000023
+Reading,Unitary Authority,E06000038
+Redcar and Cleveland,Unitary Authority,E06000003
+Renfrewshire,Unitary Authority,S12000038
+Rhondda Cynon Taf - Rhondda Cynon Taf,Unitary Authority,W06000016
+Rutland,Unitary Authority,E06000017
+Scottish Borders,Unitary Authority,S12000026
+Shropshire,Unitary Authority,E06000051
+Sir Ddinbych - Denbighshire,Unitary Authority,W06000004
+Sir Gaerfyrddin - Carmarthenshire,Unitary Authority,W06000010
+Sir y Fflint - Flintshire,Unitary Authority,W06000005
+Slough,Unitary Authority,E06000039
+Southend-on-Sea,Unitary Authority,E06000033
+South Gloucestershire,Unitary Authority,E06000025
+South Lanarkshire,Unitary Authority,S12000029
+Stirling,Unitary Authority,S12000030
+Stockton-on-Tees,Unitary Authority,E06000004
+Swindon,Unitary Authority,E06000030
+Telford and Wrekin,Unitary Authority,E06000020
+The City of Brighton and Hove,Unitary Authority,E06000043
+Thurrock,Unitary Authority,E06000034
+Tor-faen - Torfaen,Unitary Authority,W06000020
+Torbay,Unitary Authority,E06000027
+Warrington,Unitary Authority,E06000007
+West Berkshire,Unitary Authority,E06000037
+West Dunbartonshire,Unitary Authority,S12000039
+West Lothian,Unitary Authority,S12000040
+Wiltshire,Unitary Authority,E06000054
+Windsor and Maidenhead,Unitary Authority,E06000040
+Wokingham,Unitary Authority,E06000041
+Wrecsam - Wrexham,Unitary Authority,W06000006
+York,Unitary Authority,E06000014
+Broadland District,District,E07000144
+North Norfolk District,District,E07000147
+South Hams District,District,E07000044
+Torridge District,District,E07000046
+Isle of Wight,Unitary Authority,E06000046
+Sir Ynys Mon - Isle of Anglesey,Unitary Authority,W06000001
+Gwynedd - Gwynedd,Unitary Authority,W06000002
+Caerdydd - Cardiff,Unitary Authority,W06000015
+Sir Ceredigion - Ceredigion,Unitary Authority,W06000008
+Sir Fynwy - Monmouthshire,Unitary Authority,W06000021
+Sir Benfro - Pembrokeshire,Unitary Authority,W06000009
+North Somerset,Unitary Authority,E06000024
+Highland,Unitary Authority,S12000017
+Moray,Unitary Authority,S12000020
+Orkney Islands,Unitary Authority,S12000023
+Na h-Eileanan an Iar,Unitary Authority,S12000013
+Argyll and Bute,Unitary Authority,S12000035
+Aberdeenshire,Unitary Authority,S12000034
+Fife,Unitary Authority,S12000015
+Aberdeen City,Unitary Authority,S12000033
+City of Edinburgh,Unitary Authority,S12000036
+East Lothian,Unitary Authority,S12000010
+Shetland Islands,Unitary Authority,S12000027
+North Ayrshire,Unitary Authority,S12000021
+Dumfries and Galloway,Unitary Authority,S12000006
+City of Portsmouth,Unitary Authority,E06000044
+City of Plymouth,Unitary Authority,E06000026
+South Ayrshire,Unitary Authority,S12000028
+Northumberland,Unitary Authority,E06000057
+Cornwall,Unitary Authority,E06000052
+Isles of Scilly,Unitary Authority,E06000053
