@@ -1,23 +1,5 @@
-library(knitr)
-library(markdown)
-library(rmarkdown)
-library(dplyr)
-library(jsonlite)
-library(magrittr)
-library(httr)
-library(raster)
-library(rgeos)
-require(ggplot2)
-require(maptools)
-require(leaflet)
-require(DT)
-require(lubridate)
-require(data.table)
 require(sp)
-require(tidyr)
-require(waffle)
 require(openair)
-require(rgdal)
 
 wd <- getwd()
 
@@ -41,10 +23,9 @@ if (!file.exists(paste0(wd, "/results-", date_now))) {
 }
 
 # loop to produce outputs
-
-for (CODE in LA$CODE){
+for(CODE in LA$CODE){
   rmarkdown::render('LA_STATS19.Rmd', 
-                    output_file =  paste0(wd, "/results",date, "/report_", CODE, '_', date, ".html"), encoding = "UTF-8")
+                    output_file =  paste0(wd, "/results", date_now, "/report_", CODE, '_', date_now, ".html"), encoding = "UTF-8")
   # for pdf reports  
   #   rmarkdown::render(input = "LA_STATS19.Rmd", 
   #           output_format = "pdf_document",

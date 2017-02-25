@@ -1,0 +1,69 @@
+---
+output: html_document
+---
+
+```{r, echo=FALSE, warning=FALSE}
+library(ggplot2)
+library(leaflet)
+library(knitr)
+```
+
+```{r, echo=FALSE}
+ThisLA <- LA[LA$CODE==CODE,]
+```
+
+# `r ThisLA$NAME` Air Quality Factsheet
+
+##Local Authority Boundary
+```{r Boundary Area Map, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+#read in shapefile
+LA.shp <- readShapeSpatial('LA_WGS84', proj4string = CRS("+init=epsg:4326"))
+AQMA.shp<-readShapeSpatial('AQMA_WGS84', proj4string = CRS("+init=epsg:4326"))
+LA.subset <- LA.shp[LA.shp$CODE==CODE, ]
+
+# AQMA.subset <- intersect(AQMA.shp,LA.subset)
+
+LAmap <-leaflet() %>%
+  addTiles() %>% # Add default OpenStreetMap map tiles
+addPolygons(
+    data=LA.subset, weight = 2) %>% # Add default OpenStreetMap map tiles
+# addPolygons(
+#     data=AQMA.subset, weight = 2)
+LAmap  # Print the map
+
+```
+
+© Ordnance Survey & Crown copyright and database right 2017
+ 
+```{r Accident location subset, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
+
+airquality_subset <- stations_raw[LA.subset, ]
+
+
+LAmap2 <-leaflet() %>%
+  addTiles() %>% # Add default OpenStreetMap map tiles
+  addPolygons(
+    data=LA.subset, fillOpacity = 0.1, weight = 2) %>%
+addCircleMarkers(
+    data = airquality_subset,
+    radius = 1, color="blue")
+
+LAmap2  # Print the map
+
+```
+
+```{r}
+
+df <- get1Hdata('MY1', years=2015)
+
+# Aggregate to daily means and plot
+library('zoo')
+par(mai = c(0.5, 1, 0, 0)) 
+my1 <- zoo(x = df$Ozone, order.by = as.POSIXlt(df$datetime))
+plot(aggregate(my1, as.Date(as.POSIXlt(df$datetime)), mean), 
+     main = '', xlab = '', ylab = expression(paste('Ozone concentration [',
+                                                    mu, 'g/', m^3, ']')))
+```
+
+
