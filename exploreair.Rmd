@@ -11,11 +11,11 @@ library(lubridate)
 
 # `r zones@data[i,3] ` Air Quality Factsheet
 
-## Boundary of `r zones@data[i,3]` and AQMA zones
+## Boundary of `r zones@data[i,3]` & AQMA zones
 
 ```{r Boundary Area Map, echo=FALSE}
 
-if(!is.null(AQMA[zones[i,],])){
+if(length(AQMA[zones[i,],]) >= 1){
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
 addPolygons(
