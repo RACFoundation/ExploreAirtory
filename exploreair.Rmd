@@ -57,9 +57,7 @@ if(!is.null(nox)){
 
  
 ```{r Accident location subset, fig.width=8, fig.height=10, echo=FALSE, warning=FALSE, message=FALSE}
-# 
-# airquality_subset <- stations_raw[LA.subset, ]
-# 
+
 # 
 # LAmap2 <-leaflet() %>%
 #   addTiles() %>% # Add default OpenStreetMap map tiles
