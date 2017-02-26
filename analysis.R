@@ -12,7 +12,7 @@ plot(stations_raw)
 
 date_now <- (Sys.Date())
 
-## Warning: spgeom1 and spgeom2 have different proj4 strings
+# select zone type, load shp files and make folders
 zones <- dl_las()
 proj4string(stations_raw) = proj4string(zones)
 zone_type <- c("las", "wmc")[1]

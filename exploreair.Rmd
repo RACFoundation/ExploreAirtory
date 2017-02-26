@@ -11,21 +11,30 @@ library(lubridate)
 
 # `r zones@data[i,3] ` Air Quality Factsheet
 
-## Local Authority Boundary
+## Boundary of `r zones@data[i,3]` and AQMA zones
 
 ```{r Boundary Area Map, echo=FALSE}
 
-leaflet() %>%
+if(!is.null(AQMA[zones[i,],])){
+  leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
 addPolygons(
     data=zones[i,], fillOpacity = 0, weight = 2) %>%
 addPolygons(
   data=AQMA[zones[i,],], color = "red", weight = 1)
+} else {
+  print("There are no AQMA zones in this area")
+  leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+addPolygons(
+    data=zones[i,], fillOpacity = 0, weight = 2)
+}
 
 ```
 
 © Ordnance Survey & Crown copyright and database right 2017
 [add in AQMA shp file copyright notice]
+
 ## NOx
 
 
