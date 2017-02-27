@@ -13,9 +13,9 @@ plot(stations_raw)
 date_now <- (Sys.Date())
 
 # select zone type, load shp files and make folders
-zones <- dl_las()
-proj4string(stations_raw) = proj4string(zones)
 zone_type <- c("las", "wmc")[1]
+zones <- dl_zones(zone_type)
+proj4string(stations_raw) = proj4string(zones)
 plot(zones)
 res_dir <- paste0(zone_type, "/results-", date_now)
 if (!file.exists(res_dir)) {
@@ -29,9 +29,8 @@ zones$n_sensors = NA # how many sensors per zone?
 zones$nox = NA # average nox levels
 
 # loop to produce outputs
-i = 1 # initiate for testing in for loop
-# for(i in 1:length(zones)){
-for(i in 1:9){ # for testing
+# for(i in 1:10) #for testing
+for(i in 1:length(zones)){
   res_dir_zone = file.path(res_dir, zones@data[i,1])
   dir.create(res_dir_zone)
   
@@ -39,7 +38,7 @@ for(i in 1:9){ # for testing
   stns_in_zone = stations_raw[zones[i,],]
   if(length(stns_in_zone) == 0)
     next() else
-      stns_in_zone = stns_in_zone[1,] # assumes only one for now...
+      stns_in_zone = stns_in_zone # assumes only one for now...
   
   nox = importAURN(site = stns_in_zone$code, year = 2009, pollutant = "nox", hc = FALSE,
              meta = FALSE, verbose = FALSE)
