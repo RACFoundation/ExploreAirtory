@@ -10,12 +10,14 @@ dl_las <- function(zone_type = "las"){
     zones
   } 
   if(zone_type == "las"){
-    url_las <- "http://geoportal.statistics.gov.uk/datasets/686603e943f948acaa13fb5d2b0f1275_0.zip"
+    url_las <- "http://geoportal.statistics.gov.uk/datasets/686603e943f948acaa13fb5d2b0f1275_2.zip"
     download.file(url_las, destfile = "zones.zip")
     unzip("zones.zip")
-    zones = readOGR("Local_Authority_Districts_December_2016_Full_Clipped_Boundaries_in_Great_Britain.shp")
+    zones = readOGR("Local_Authority_Districts_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.shp")
     f_to_delete <- list.files(pattern = "Local_Authority_Districts_")
     file.remove(f_to_delete)
     zones
   }
 }
+
+getwd()
