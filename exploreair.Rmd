@@ -23,17 +23,37 @@ addPolygons(
 addPolygons(
   data=AQMA[zones[i,],], color = "red", weight = 1)
 } else {
-  print("There are no AQMA zones in this area")
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
 addPolygons(
     data=zones[i,], fillOpacity = 0, weight = 2)
+  print("There are no AQMA zones in this area")
 }
 
 ```
 
 © Ordnance Survey & Crown copyright and database right 2017
 [add in AQMA shp file copyright notice]
+
+## Boundary of `r zones@data[i,3]` & AURN stations
+
+```{r Boundary Area Map 2, echo=FALSE}
+
+if(length(AQMA[zones[i,],]) >= 1){
+  leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+addPolygons(
+    data=zones[i,], fillOpacity = 0, weight = 2) %>%
+addCircleMarkers(
+  data=stations_raw[zones[i,],], color = "red", weight = 1)
+} else {
+  print("There are no AURN stations in this area")
+}
+
+```
+
+© Ordnance Survey & Crown copyright and database right 2017
+[add in AURN points copyright notice]
 
 ## NOx
 
